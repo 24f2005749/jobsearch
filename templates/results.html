@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="results-container">
+    <div class="results-header">
+        <h2>Jobs Found: {{ count }}</h2>
+        <div class="search-info">
+            <p>Showing results for <strong>{{ job_role }}</strong> in <strong>{{ location }}</strong></p>
+        </div>
+        <div class="actions">
+            <a href="{{ url_for('download') }}" class="download-button">Download CSV</a>
+            <a href="{{ url_for('index') }}" class="new-search-button">New Search</a>
+        </div>
+    </div>
+    
+    <div class="job-listings">
+        {% for job in results %}
+        <div class="job-card">
+            <h3 class="job-title">{{ job.title }}</h3>
+            <div class="job-company">
+                <span class="company-name">{{ job.company.display_name }}</span>
+                <span class="job-location">{{ job.location.display_name }}</span>
+            </div>
+            
+            {% if job.salary_min or job.salary_max %}
+            <div class="job-salary">
+                <strong>Salary:</strong> 
+                {% if job.salary_min %}{{ job.salary_min }}{% else %}N/A{% endif %} - 
+                {% if job.salary_max %}{{ job.salary_max }}{% else %}N/A{% endif %} 
+                {{ job.salary_currency }}
+            </div>
+            {% endif %}
+            
+            <div class="job-description">
+                <p>{{ job.description[:200] }}{% if job.description|length > 200 %}...{% endif %}</p>
+            </div>
+            
+            <div class="job-actions">
+                <a href="{{ job.redirect_url }}" target="_blank" class="apply-button">View Job</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
