@@ -7,8 +7,8 @@ from datetime import datetime
 class JobSearch:
     def __init__(self):
         # Adzuna API credentials - you'll need to register at https://developer.adzuna.com/
-        self.app_id = "2416957f"  # Replace with your App ID
-        self.app_key = "32140c820ac42935379c80156dc25b2c"  # Replace with your API Key
+        self.app_id = "apiid"  # Replace with your App ID
+        self.app_key = "apikey"  # Replace with your API Key
         self.base_url = "https://api.adzuna.com/v1/api/jobs"
         self.results = []
         
